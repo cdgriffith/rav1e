@@ -651,6 +651,12 @@ unsafe fn option_match(
       enc.enable_timing_info = value.parse().map_err(|_| ())?
     }
     "still_picture" => enc.still_picture = value.parse().map_err(|_| ())?,
+    "mastering_display" => {
+      enc.mastering_display = Some(value.parse().map_err(|_| ())?)
+    }
+    "content_light" => {
+      enc.content_light = Some(value.parse().map_err(|_| ())?)
+    }
 
     _ => return Err(()),
   }
@@ -680,6 +686,8 @@ unsafe fn option_match(
 /// - "low_latency": flag to enable low latency mode, default false
 /// - "enable_timing_info": flag to enable signaling timing info in the bitstream, default false
 /// - "still_picture": flag for still picture mode, default false
+/// - "mastering_display": HDR mastering display parameters, default None
+/// - "content_light": HDR content light parameters, default None
 ///
 /// Return a negative value on error or 0.
 #[no_mangle]
